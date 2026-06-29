@@ -11,18 +11,32 @@
 
 <body>
 
-    <form action="">
-        <div class="wrapper">
+    <div action="" class="start-screen">
+        <div class="wrapper"> 
             <h1>لعبة حروف</h1>
-            <div class="input-box">
-                <input type="text" placeholder="اسم الفريق الاول" required id="first-team">
+            <div class="input-box" id="team1">
+                <input type="text" placeholder="اسم الفريق الاول"  id="first-team">
             </div>
-            <div class="input-box">
-                <input type="text" placeholder="اسم الفريق الثاني" required id="second-team">
+            <div class="input-box" id="team2">
+                <input type="text" placeholder="اسم الفريق الثاني"  id="second-team">
             </div>
-            <button type="submit" class="ply-btn">العب</button>
+            <button class="ply-btn">العب</button>
         </div>
-    </form>
+    </div>
+
+    <section class="board hidden" >
+        <div class="sqr" id="0">أ</div>
+        <div class="sqr" id="1">د</div>
+        <div class="sqr" id="2">ن</div>
+        <div class="sqr" id="3">س</div>
+        <div class="sqr" id="4">ص</div>
+        <div class="sqr" id="5">ع</div>
+        <div class="sqr" id="6">ب</div>
+        <div class="sqr" id="7">ر</div>
+        <div class="sqr" id="8">خ</div>
+    </section>
+    
+
 </body>
 
 </html>
