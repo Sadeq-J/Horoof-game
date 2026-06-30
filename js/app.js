@@ -14,6 +14,15 @@ const questionMenu = document.querySelector('.qus')
 
 const qun = document.querySelector('#qun')
 
+const changeQuestionBtnElement = document.querySelector('#change-answer-btn')
+const answerBtnElement = document.querySelector('#answer-btn')
+
+const answerElement = document.querySelector('.ques-answer')
+
+const noAnswerBtnElement = document.querySelector('#no-answer-btn')
+const team1BtnElement = document.querySelector('#team-1')
+const team2BtnElement = document.querySelector('#team-2')
+
 
 
 const questions = {
@@ -124,13 +133,25 @@ const questions = {
 let team1
 let team2
 
-let turn = team1
+let selectedSquare
 
-let randomQuestion = Math.floor(Math.random() * 3)
+let pickedQuestion
+
+
+
 const board = [
-    'أ', 'د', 'ن',
-    'س', 'ص', 'ع',
-    'ب', 'ر', 'خ']
+    {owner: null},
+    {owner: null},
+    {owner: null},
+
+    {owner: null},
+    {owner: null},
+    {owner: null},
+
+    {owner: null},
+    {owner: null},
+    {owner: null}
+]
 
 const team1WinningCombos = [
     [0, 3, 6],
@@ -156,9 +177,12 @@ const team2WinningCombos = [
     [8, 7, 4, 1, 0]
 ]
 
-function playGame(){
+function playGame() {
     team1 = team1Input.value
     team2 = team2Input.value
+
+    document.body.classList.add("team1-turn")
+    document.body.classList.remove("team2-turn")
 
     console.log(team1)
     console.log(team2)
@@ -168,29 +192,66 @@ function playGame(){
     boardElement.classList.remove('hidden')
 }
 
-function updateBoard(){
-    board.forEach((Cell, index) =>{
-        sqrElement[index].textContent = Cell;
-    }) 
+function updateBoard() {
+    
 }
 
-function handleClick(event){
+function handleClick(event) {
+    selectedSquare = event.target
     questionMenu.classList.remove("hidden")
     document.querySelector('.letter').innerHTML = event.target.textContent
 
     getQuestion(event)
 }
 
-function getQuestion(event){
-    for(letter in questions){
-        if(event.target.textContent === letter ){
+function getQuestion(event) {
+    const letter = selectedSquare.textContent
+    let randomQuestion = Math.floor(Math.random() * questions[letter].length)
+    for (let letter in questions) {
+        if (event.target.textContent === letter) {
             qun.textContent = questions[letter][randomQuestion].question
+            pickedQuestion = questions[letter][randomQuestion].question
         }
     }
 }
 
+function getAnswer(event) {
+    questionMenu.classList.add("hidden")
+    document.querySelector('.answer-menu').classList.remove('hidden')
+    q.textContent = pickedQuestion
+    console.log(`picked question ${pickedQuestion}`)
+
+    for (let letter in questions) {
+        for (let q of questions[letter]) {
+            if (q.question === pickedQuestion) {
+                answerElement.textContent = q.answer
+            }
+        }
+    }
+
+    team1BtnElement.textContent = team1
+    team2BtnElement.textContent = team2
+}
+
+
+function changeQuestion(){
+    const letter = selectedSquare.textContent
+    let randomQuestion = Math.floor(Math.random() * questions[letter].length)
+    for (let letter in questions) {
+        if (selectedSquare.textContent === letter) {
+            qun.textContent = questions[letter][randomQuestion].question
+            pickedQuestion = questions[letter][randomQuestion].question
+        }
+    }
+}
+
+
 playBtn.addEventListener('click', playGame)
 
-sqrElement.forEach(oneSquare=>{
+sqrElement.forEach(oneSquare => {
     oneSquare.addEventListener('click', handleClick)
 })
+
+changeQuestionBtnElement.addEventListener('click', changeQuestion)
+answerBtnElement.addEventListener('click', getAnswer)
+

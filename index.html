@@ -12,19 +12,19 @@
 <body>
 
     <div action="" class="start-screen">
-        <div class="wrapper"> 
+        <div class="wrapper">
             <h1>لعبة حروف</h1>
             <div class="input-box" id="team1">
-                <input type="text" placeholder="اسم الفريق الاول"  id="first-team">
+                <input type="text" placeholder="اسم الفريق الاول" id="first-team">
             </div>
             <div class="input-box" id="team2">
-                <input type="text" placeholder="اسم الفريق الثاني"  id="second-team">
+                <input type="text" placeholder="اسم الفريق الثاني" id="second-team">
             </div>
             <button class="ply-btn">العب</button>
         </div>
     </div>
 
-    <section class="board hidden" >
+    <section class="board hidden">
         <div class="sqr" id="0">أ</div>
         <div class="sqr" id="1">د</div>
         <div class="sqr" id="2">ن</div>
@@ -35,13 +35,26 @@
         <div class="sqr" id="7">ر</div>
         <div class="sqr" id="8">خ</div>
     </section>
-    
+
     <div class="qus hidden">
         <h1 class="letter"></h1>
         <h1 class="question">:السؤال</h1>
         <h1 class="question" id="qun"></h1>
-        
-        <button id="answer">الاجابة</button>
+
+        <div class="q-btn">
+            <button class="q-menu-btn" id="answer-btn">الاجابة</button>
+            <button class="q-menu-btn" id="change-answer-btn">تغير السؤال</button>
+        </div>
+    </div>
+
+    <div class="answer-menu hidden">
+        <h1 id="q"></h1>
+        <h1 class="ques-answer"></h1>
+
+        <div class="team-btn">
+            <button id="team-1"></button>
+            <button id="team-2"></button>
+        </div>
     </div>
 
 </body>
