@@ -245,6 +245,25 @@ function changeQuestion(){
     }
 }
 
+function chooseTeam(team){
+    const index = Number(selectedSquare.id)
+
+    board[index].owner = team
+
+    if(team === team1){
+        selectedSquare.style.backgroundColor = "#9CBAA5"
+        selectedSquare.textContent = ""
+    }
+    else{
+        selectedSquare.style.backgroundColor = "#F2A35F"
+        selectedSquare.textContent = ""
+    }
+
+    document.querySelector('.answer-menu').classList.add('hidden')
+
+    console.log(board)
+}
+
 
 playBtn.addEventListener('click', playGame)
 
@@ -254,4 +273,7 @@ sqrElement.forEach(oneSquare => {
 
 changeQuestionBtnElement.addEventListener('click', changeQuestion)
 answerBtnElement.addEventListener('click', getAnswer)
+
+team1BtnElement.addEventListener("click", () => chooseTeam(team1));
+team2BtnElement.addEventListener("click", () => chooseTeam(team2));
 
