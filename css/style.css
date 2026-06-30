@@ -225,7 +225,13 @@ body {
     background-color: red;
 }
 
+body.team1-turn .sqr:hover {
+    background-color: #9CBAA5;
+}
 
+body.team2-turn .sqr:hover {
+    background-color: #F2A35F;
+}
 
 .hidden {
     display: none;

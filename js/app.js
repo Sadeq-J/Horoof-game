@@ -133,6 +133,8 @@ const questions = {
 let team1
 let team2
 
+let turn
+
 let selectedSquare
 
 let pickedQuestion
@@ -180,6 +182,8 @@ const team2WinningCombos = [
 function playGame() {
     team1 = team1Input.value
     team2 = team2Input.value
+
+    turn = team1
 
     document.body.classList.add("team1-turn")
     document.body.classList.remove("team2-turn")
@@ -233,18 +237,6 @@ function getAnswer(event) {
     team2BtnElement.textContent = team2
 }
 
-
-function changeQuestion(){
-    const letter = selectedSquare.textContent
-    let randomQuestion = Math.floor(Math.random() * questions[letter].length)
-    for (let letter in questions) {
-        if (selectedSquare.textContent === letter) {
-            qun.textContent = questions[letter][randomQuestion].question
-            pickedQuestion = questions[letter][randomQuestion].question
-        }
-    }
-}
-
 function chooseTeam(team){
     const index = Number(selectedSquare.id)
 
@@ -262,12 +254,42 @@ function chooseTeam(team){
     document.querySelector('.answer-menu').classList.add('hidden')
 
     console.log(board)
+
+    switchTurn()
+
 }
 
+function switchTurn() {
+    if (turn === team1) {
+        turn = team2
+
+        document.body.classList.remove("team1-turn")
+        document.body.classList.add("team2-turn")
+    } else {
+        turn = team1
+
+        document.body.classList.remove("team2-turn")
+        document.body.classList.add("team1-turn")
+    }
+
+    console.log("Turn:", turn)
+}
 function noAnswer(){
     document.querySelector('.answer-menu').classList.add('hidden')
+    switchTurn()
 }
 
+
+function changeQuestion(){
+    const letter = selectedSquare.textContent
+    let randomQuestion = Math.floor(Math.random() * questions[letter].length)
+    for (let letter in questions) {
+        if (selectedSquare.textContent === letter) {
+            qun.textContent = questions[letter][randomQuestion].question
+            pickedQuestion = questions[letter][randomQuestion].question
+        }
+    }
+}
 
 playBtn.addEventListener('click', playGame)
 
@@ -278,7 +300,6 @@ sqrElement.forEach(oneSquare => {
 changeQuestionBtnElement.addEventListener('click', changeQuestion)
 answerBtnElement.addEventListener('click', getAnswer)
 
-noAnswerBtnElement.addEventListener('click', noAnswer)
 team1BtnElement.addEventListener("click", () => chooseTeam(team1));
 team2BtnElement.addEventListener("click", () => chooseTeam(team2));
-
+noAnswerBtnElement.addEventListener('click', noAnswer)
