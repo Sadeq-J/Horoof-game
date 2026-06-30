@@ -264,6 +264,10 @@ function chooseTeam(team){
     console.log(board)
 }
 
+function noAnswer(){
+    document.querySelector('.answer-menu').classList.add('hidden')
+}
+
 
 playBtn.addEventListener('click', playGame)
 
@@ -274,6 +278,7 @@ sqrElement.forEach(oneSquare => {
 changeQuestionBtnElement.addEventListener('click', changeQuestion)
 answerBtnElement.addEventListener('click', getAnswer)
 
+noAnswerBtnElement.addEventListener('click', noAnswer)
 team1BtnElement.addEventListener("click", () => chooseTeam(team1));
 team2BtnElement.addEventListener("click", () => chooseTeam(team2));
 
