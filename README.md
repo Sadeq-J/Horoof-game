@@ -17,8 +17,9 @@ Horoof is a two-team Arabic word game inspired by connection-based strategy game
 - As a user, I want to know when a team has won the game.
 
 ## Screenshots
+![alt text](<assets/Screenshot 2026-07-01 at 2.23.33 PM.png>)
 
-
+![alt text](<assets/Screenshot 2026-07-01 at 2.24.19 PM.png>)
 
 ## Future Enhancements
 - Add a larger question
