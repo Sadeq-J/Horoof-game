@@ -1,4 +1,4 @@
-#Horoof game
+# Horoof game
 
 ## Technologies Used
 
