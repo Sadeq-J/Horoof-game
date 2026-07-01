@@ -117,7 +117,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.6);
     color: #E6B04A;
     border-radius: 20px;
-    padding: 30px 40px;
+    padding: 0px 20px;
     box-shadow: 0 15px 35px rgba(0,0,0,.15);
     display: flex;
     align-items: center;
@@ -191,7 +191,7 @@ body {
 
 #no-answer-btn{
     position: fixed;
-    margin-top: 200px;
+    margin-bottom: 120px;
     width: 20%;
     height: 45px;
     border: none;
