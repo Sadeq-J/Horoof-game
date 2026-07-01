@@ -23,7 +23,9 @@ const noAnswerBtnElement = document.querySelector('#no-answer-btn')
 const team1BtnElement = document.querySelector('#team-1')
 const team2BtnElement = document.querySelector('#team-2')
 
-
+const winnerScreen = document.querySelector(".winner-screen");
+const winnerText = document.querySelector("#winner-text");
+const restartBtn = document.querySelector("#restart-btn");
 
 const questions = {
     "أ": [
@@ -260,7 +262,9 @@ function chooseTeam(team){
     console.log(board)
 
     if (checkWinner(team)) {
-        console.log(team)
+        winnerText.textContent = `الفريق الفائز ${team}`
+        winnerScreen.classList.remove('hidden')
+        boardElement.classList.add("hidden");
     }
 
     switchTurn()
@@ -327,3 +331,7 @@ team1BtnElement.addEventListener("click", () => chooseTeam(team1));
 team2BtnElement.addEventListener("click", () => chooseTeam(team2));
 noAnswerBtnElement.addEventListener('click', noAnswer)
 
+
+restartBtn.addEventListener("click", () => {
+    location.reload();
+});
