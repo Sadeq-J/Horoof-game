@@ -139,6 +139,8 @@ let selectedSquare
 
 let pickedQuestion
 
+let winner
+
 
 
 const board = [
@@ -164,7 +166,7 @@ const team1WinningCombos = [
     [1, 4, 5, 8],
     [2, 5, 8],
     [2, 5, 4, 7],
-    [2, 5, 5, 3, 6]
+    [2, 5, 4, 3, 6]
 ]
 
 const team2WinningCombos = [
@@ -173,7 +175,7 @@ const team2WinningCombos = [
     [2, 1, 4, 7, 6],
     [5, 4, 3],
     [5, 4, 1, 0],
-    [5, 4, 7, 8],
+    [5, 4, 7, 6],
     [8, 7, 6],
     [8, 7, 4, 3],
     [8, 7, 4, 1, 0]
@@ -182,11 +184,12 @@ const team2WinningCombos = [
 function playGame() {
     team1 = team1Input.value
     team2 = team2Input.value
+    
+    if(!team1 && !team2) return
 
     turn = team1
 
     document.body.classList.add("team1-turn")
-    document.body.classList.remove("team2-turn")
 
     console.log(team1)
     console.log(team2)
@@ -196,15 +199,16 @@ function playGame() {
     boardElement.classList.remove('hidden')
 }
 
-function updateBoard() {
-    
-}
 
 function handleClick(event) {
     selectedSquare = event.target
+    const index = Number(selectedSquare.id)
+
+    if(board[index].owner) return
+
     questionMenu.classList.remove("hidden")
     document.querySelector('.letter').innerHTML = event.target.textContent
-
+    
     getQuestion(event)
 }
 
@@ -246,7 +250,7 @@ function chooseTeam(team){
         selectedSquare.style.backgroundColor = "#9CBAA5"
         selectedSquare.textContent = ""
     }
-    else{
+    else if (team === team2){
         selectedSquare.style.backgroundColor = "#F2A35F"
         selectedSquare.textContent = ""
     }
@@ -254,6 +258,10 @@ function chooseTeam(team){
     document.querySelector('.answer-menu').classList.add('hidden')
 
     console.log(board)
+
+    if (checkWinner(team)) {
+        console.log(team)
+    }
 
     switchTurn()
 
@@ -291,6 +299,21 @@ function changeQuestion(){
     }
 }
 
+function checkWinner(team) {
+
+    let winningCombos
+
+    if (team === team1) {
+        winningCombos = team1WinningCombos
+    } else {
+        winningCombos = team2WinningCombos
+    }
+
+    return winningCombos.some(combo => combo.every(index => board[index].owner === team))
+
+}
+
+
 playBtn.addEventListener('click', playGame)
 
 sqrElement.forEach(oneSquare => {
@@ -303,3 +326,4 @@ answerBtnElement.addEventListener('click', getAnswer)
 team1BtnElement.addEventListener("click", () => chooseTeam(team1));
 team2BtnElement.addEventListener("click", () => chooseTeam(team2));
 noAnswerBtnElement.addEventListener('click', noAnswer)
+
